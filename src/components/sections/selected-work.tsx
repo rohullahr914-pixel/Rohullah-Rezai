@@ -1,4 +1,5 @@
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { projectAssets, projects } from "@/data/portfolio";
 import { ProjectArtwork } from "@/components/sections/project-artwork";
 
@@ -11,17 +12,19 @@ export function SelectedWork() {
         <div className="project-list">
           {projects.map((project) => (
             <article className={"project-card" + (project.featured ? " project-featured" : "")} key={project.slug} data-reveal>
-              <ProjectArtwork slug={project.slug} name={project.name} asset={projectAssets[project.slug]} featured={project.featured} />
-              <div className="project-info">
-                <div className="project-number">{project.number} <span>/ PROJECT</span></div>
-                <div className="project-description"><span className="eyebrow">{project.category}</span><h3>{project.name}</h3><p>{project.description}</p></div>
-                {project.url ? <a className="project-action" href={project.url} target="_blank" rel="noreferrer" data-cursor="link" aria-label={"Visit " + project.name}><span>Visit project</span><ArrowUpRight size={17} /></a> : <span className="project-action is-unavailable" aria-label="Project link not supplied"><span>Project link not supplied</span><ArrowRight size={16} /></span>}
-              </div>
+              <Link className="project-card-link" href={"/projects/" + project.slug} aria-label={"Open " + project.name + " project page"} data-cursor="project">
+                <ProjectArtwork slug={project.slug} name={project.name} asset={projectAssets[project.slug]} featured={project.featured} />
+                <div className="project-info">
+                  <div className="project-number">{project.number} <span>/ PROJECT</span></div>
+                  <div className="project-description"><span className="eyebrow">{project.category}</span><h3>{project.name}</h3><p>{project.description}</p></div>
+                  <span className="project-action"><span>Open project</span><ArrowRight size={16} /></span>
+                </div>
+              </Link>
             </article>
           ))}
         </div>
       </div>
-      <p className="work-footnote">Project screens and live URLs can be added as they become available.</p>
+      <p className="work-footnote">Open a project to explore its concept and details.</p>
     </section>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Check, Copy, Github, Linkedin, Mail, Send } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Check, Copy, Mail, Send } from "lucide-react";
 import { useState } from "react";
+import { GithubMark, LinkedInMark } from "@/components/icons/social-icons";
 import { profile, socialLinks } from "@/data/portfolio";
 
-const icons = { GitHub: Github, LinkedIn: Linkedin, X: ArrowUpRight, WhatsApp: Send };
+const icons = { GitHub: GithubMark, LinkedIn: LinkedInMark, X: ArrowUpRight, WhatsApp: Send };
 
 export function Contact() {
   const [copied, setCopied] = useState(false);

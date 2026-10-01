@@ -10,7 +10,7 @@ export const profile = {
   availability: "Available worldwide",
   github: "https://github.com/rohullahr914-pixel",
   githubHandle: "@rohullahr914-pixel",
-  linkedin: null as LinkValue,
+  linkedin: "https://www.linkedin.com/in/rohullah-rezai-9b41923b7" as LinkValue,
   x: null as LinkValue,
   whatsapp: null as LinkValue,
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? null,
@@ -57,7 +57,7 @@ export const projects = [
     slug: "soulx",
     category: "AI Platform / AI Personas / Social AI",
     description: "An AI persona platform designed around interactive AI identities, conversations and community experiences.",
-    url: null as LinkValue,
+    url: "https://soulxai.tech" as LinkValue,
     featured: true,
   },
   {
@@ -66,7 +66,7 @@ export const projects = [
     slug: "bamboo",
     category: "Business Website",
     description: "A business website for Bamboo Cleaning.",
-    url: null as LinkValue,
+    url: "https://bamboocleaning.com.my" as LinkValue,
     featured: false,
   },
   {
@@ -75,7 +75,7 @@ export const projects = [
     slug: "ccacsc",
     category: "Web Platform",
     description: "A web platform for CCACSC.",
-    url: null as LinkValue,
+    url: "https://ccacsc.org" as LinkValue,
     featured: false,
   },
   {
@@ -84,7 +84,7 @@ export const projects = [
     slug: "kaaj",
     category: "Healthcare / Dental Website",
     description: "A website for Kaaj Dental Clinic.",
-    url: null as LinkValue,
+    url: "https://kaaj-dental-clinic-new.vercel.app" as LinkValue,
     featured: false,
   },
 ];

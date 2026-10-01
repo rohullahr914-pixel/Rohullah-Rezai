@@ -12,13 +12,21 @@ export function ProjectArtwork({ slug, name, asset, featured }: { slug: string; 
   function tilt(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !artRef.current) return;
     const bounds = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    artRef.current.style.transform = "perspective(1200px) rotateX(" + (-y * 2.2) + "deg) rotateY(" + (x * 2.4) + "deg) translateY(-2px)";
+    const x = (event.clientX - bounds.left) / bounds.width;
+    const y = (event.clientY - bounds.top) / bounds.height;
+    const tiltX = (0.5 - y) * 7;
+    const tiltY = (x - 0.5) * 8;
+    artRef.current.style.setProperty("--pointer-x", (x * 100).toFixed(1) + "%");
+    artRef.current.style.setProperty("--pointer-y", (y * 100).toFixed(1) + "%");
+    artRef.current.style.transform = "perspective(1400px) rotateX(" + tiltX.toFixed(2) + "deg) rotateY(" + tiltY.toFixed(2) + "deg) translateY(-5px) scale3d(1.012, 1.012, 1.012)";
   }
 
   function resetTilt() {
-    if (artRef.current) artRef.current.style.transform = "";
+    if (artRef.current) {
+      artRef.current.style.transform = "";
+      artRef.current.style.removeProperty("--pointer-x");
+      artRef.current.style.removeProperty("--pointer-y");
+    }
   }
 
   return (

@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { skills } from "@/data/portfolio";
-import { supportsDesktopWebGL } from "@/lib/capabilities";
+import { useSupportsDesktopWebGL } from "@/lib/capabilities";
 
 const TechnologyScene = dynamic(() => import("@/components/three/technology-scene"), {
   ssr: false,
@@ -13,14 +13,12 @@ const TechnologyScene = dynamic(() => import("@/components/three/technology-scen
 export function Technology() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeSkill, setActiveSkill] = useState("React.js");
-  const [sceneReady, setSceneReady] = useState(false);
+  const sceneReady = useSupportsDesktopWebGL(900);
   const [sceneActive, setSceneActive] = useState(false);
   const activeCategory = useMemo(() => skills.find((group) => group.items.includes(activeSkill))?.category ?? "Technology", [activeSkill]);
 
   useEffect(() => {
-    const capable = supportsDesktopWebGL(900);
-    setSceneReady(capable);
-    if (!capable || !sectionRef.current) return;
+    if (!sceneReady || !sectionRef.current) return;
     const observer = new IntersectionObserver(([entry]) => setSceneActive(entry.isIntersecting && !document.hidden), { threshold: 0.05 });
     observer.observe(sectionRef.current);
     const onVisibility = () => {
@@ -32,7 +30,7 @@ export function Technology() {
       observer.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, []);
+  }, [sceneReady]);
 
   return (
     <section className="section technology-section" id="technology" ref={sectionRef} aria-labelledby="technology-title">

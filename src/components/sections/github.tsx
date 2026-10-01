@@ -1,4 +1,5 @@
-import { ArrowUpRight, Github as GithubIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { GithubMark } from "@/components/icons/social-icons";
 import { profile } from "@/data/portfolio";
 
 export function Github() {
@@ -6,7 +7,7 @@ export function Github() {
     <section className="section github-section" id="github" aria-labelledby="github-title">
       <div className="section-topline"><span>CODE / OPEN SOURCE</span><span>PUBLIC WORKSPACE</span></div>
       <div className="github-layout" data-reveal>
-        <div className="github-heading"><span className="eyebrow">A LOOK UNDER THE HOOD</span><h2 id="github-title">BUILT IN<br /><em>PUBLIC.</em></h2><p>Code, experiments and the work behind the work.</p><a className="outline-link" href={profile.github} target="_blank" rel="noreferrer" data-cursor="link"><GithubIcon size={16} /> View GitHub <ArrowUpRight size={15} /></a></div>
+        <div className="github-heading"><span className="eyebrow">A LOOK UNDER THE HOOD</span><h2 id="github-title">BUILT IN<br /><em>PUBLIC.</em></h2><p>Code, experiments and the work behind the work.</p><a className="outline-link" href={profile.github} target="_blank" rel="noreferrer" data-cursor="link"><GithubMark size={16} /> View GitHub <ArrowUpRight size={15} /></a></div>
         <div className="terminal-window" aria-label="Terminal introducing Rohullah Rezai">
           <div className="terminal-top"><div className="terminal-dots"><i /><i /><i /></div><span>ROHULLAH@PORTFOLIO:~</span><span>SESSION 01</span></div>
           <div className="terminal-content">

@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
+import { Float, Sparkles } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -13,6 +13,7 @@ const nodes: [number, number, number][] = [
 
 function TechnologyNetwork() {
   const group = useRef<THREE.Group>(null);
+  const core = useRef<THREE.Mesh>(null);
   const pointsGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute("position", new THREE.Float32BufferAttribute(nodes.flat(), 3));
@@ -31,12 +32,18 @@ function TechnologyNetwork() {
     group.current.rotation.y += (pointer.x * 0.12 - group.current.rotation.y) * Math.min(delta * 1.4, 1);
     group.current.rotation.x += (-pointer.y * 0.07 - group.current.rotation.x) * Math.min(delta * 1.4, 1);
     group.current.rotation.z += delta * 0.008;
+    if (core.current) {
+      const pulse = 1 + Math.sin(performance.now() * 0.0011) * 0.045;
+      core.current.scale.setScalar(pulse);
+    }
   });
 
   return (
     <group ref={group}>
+      <Sparkles count={22} scale={[6.3, 3.4, 2.1]} size={2} speed={0.14} opacity={0.42} color="#a1d8ce" />
       <lineSegments geometry={linksGeometry}><lineBasicMaterial color="#a1d8ce" transparent opacity={0.23} depthWrite={false} /></lineSegments>
       <points geometry={pointsGeometry}><pointsMaterial color="#b3f8e9" size={0.05} transparent opacity={0.84} sizeAttenuation depthWrite={false} /></points>
+      <mesh ref={core} position={[0.35, 0.1, 0.42]}><icosahedronGeometry args={[0.16, 1]} /><meshBasicMaterial color="#a3f5e3" wireframe transparent opacity={0.85} /></mesh>
       {nodes.filter((_, index) => index % 3 === 0).map((node, index) => <Float key={index} speed={0.6 + index * 0.08} floatIntensity={0.15} rotationIntensity={0.05}><mesh position={node}><icosahedronGeometry args={[0.11, 1]} /><meshBasicMaterial color="#94e3da" wireframe transparent opacity={0.72} /></mesh></Float>)}
     </group>
   );

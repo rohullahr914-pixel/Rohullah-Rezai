@@ -17,7 +17,7 @@ const person = {
   name: profile.name,
   jobTitle: ["AI Engineer", "Full-Stack Developer", "Founder"],
   address: { "@type": "PostalAddress", addressCountry: "Afghanistan" },
-  sameAs: [profile.github],
+  sameAs: [profile.github, profile.linkedin].filter((url): url is string => url !== null),
 };
 
 export default function Home() {
